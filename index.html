@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ali Ahmad</title>
+    <!-- Dali Mask Favicon -->
+    <link rel="icon" type="image/png" href="icon.png">
     <style>
         /* Glitch dots effect */
         .glitch-dots {
@@ -55,9 +57,8 @@
             position: absolute;
             font-family: 'Courier New', monospace;
             font-size: 14px;
-            color: #bbb;
+            color: #000; /* Changed to black */
             animation: float-ascii 12s linear infinite;
-            opacity: 0.7;
         }
 
         @keyframes float-ascii {
@@ -66,10 +67,10 @@
                 opacity: 0;
             }
             10% {
-                opacity: 0.7;
+                opacity: var(--particle-opacity);
             }
             90% {
-                opacity: 0.7;
+                opacity: var(--particle-opacity);
             }
             100% {
                 transform: translateY(-50px) translateX(30px) rotate(360deg);
@@ -329,7 +330,7 @@
             <h1 class="name">Ali Ahmad</h1>
             <p class="title">Cyber Security Student & Researcher</p>
             <p class="description">
-                Trying to learn, observe, and research on the recent changes in the field of cyber security & Computer Science and Engineering.
+                Trying to learn, observe, and research on the recent changes in the field of Cyber Security & Computer Science and Engineering.
             </p>
             <div class="social-links">
                 <a href="https://www.linkedin.com/in/ali-ahmad-ali/" target="_blank" rel="noopener">LinkedIn</a>
@@ -340,7 +341,6 @@
         </div>
 
         <!-- Center ASCII Art -->
-        <!-- Center ASCII Art (removed revolving-ascii-at) -->
         <div class="ascii-art-container"></div>
     </div>
 
@@ -364,24 +364,31 @@
         setInterval(() => {
             for (let i = 0; i < 8; i++) createGlitchDot();
         }, 100); // Every 1/10th of a second
-        // Create floating ASCII particles using all specified characters
+        
+        // Create floating ASCII particles with varying darkness
         const particles = document.getElementById('particles');
-        const asciiChars = [ '?'];   
+        const asciiChars = ['?'];   
         
         function createParticle() {
             const particle = document.createElement('div');
             particle.className = 'ascii-particle';
             particle.textContent = asciiChars[Math.floor(Math.random() * asciiChars.length)];
+            
+            // Random opacity for different darkness levels (0.2 to 0.9)
+            const opacity = 0.2 + Math.random() * 0.7;
+            particle.style.setProperty('--particle-opacity', opacity);
+            
             // Random font size between 16px and 48px
             particle.style.fontSize = (16 + Math.random() * 32) + 'px';
             // Random horizontal position
             particle.style.left = Math.random() * 100 + '%';
-            // Random vertical position
+            // Random vertical position  
             particle.style.top = Math.random() * 100 + '%';
             // Vary animation duration and delay
             particle.style.animationDuration = (Math.random() * 8 + 12) + 's';
             particle.style.animationDelay = Math.random() * 3 + 's';
             particles.appendChild(particle);
+            
             // Remove particle after animation completes
             setTimeout(() => {
                 if (particles.contains(particle)) {
@@ -400,5 +407,3 @@
     </script>
 </body>
 </html>
-
-
